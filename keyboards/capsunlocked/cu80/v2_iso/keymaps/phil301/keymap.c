@@ -14,6 +14,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+// Max delay between tap dance taps (ms)
+// #define TAPPING_TERM 125
+
 #include QMK_KEYBOARD_H
 
 // Phil's QMK TODOs
@@ -21,20 +25,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // [x] Volume controls (pscr-paus layer)
 // [x] Move RESET to ctrl layer
 // [x] Numpad on nav cluster (fn layer)
-// [X] Enable Right control
-// [ ] Ctrl+alt+delete single key
+// [x] Enable Right control
+// [x] Ctrl+alt+delete single key
 // [ ] MS Teams mute?
 
-enum {
+enum layers {
   L_DEFAULT,
   L_CTRL,
   L_FN,
-  L_SUPER
+  L_SUPER,
+};
+
+enum tap_dancing {
+  TD_MUTE_CAD,
+};
+
+// Tap dance setup
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_MUTE_CAD] = ACTION_TAP_DANCE_DOUBLE(KC_MUTE, LCTL(LALT(KC_DEL))),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEFAULT] = LAYOUT_tkl_iso(
-    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                 KC_VOLD, KC_VOLU, KC_MUTE,
+    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                  KC_VOLD, KC_VOLU, TD(TD_MUTE_CAD),
 
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,        KC_MINS,  KC_EQL,    KC_BSPC, KC_INS,  KC_HOME, KC_PGUP,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,        KC_LBRC,  KC_RBRC,            KC_DEL,  KC_END,  KC_PGDN,
