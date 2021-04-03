@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // [x] Ctrl+alt+delete single key
 // [x] FN+Enter for Ctrl+Enter ?(send email)
 // [x] MS Teams mute? (Ctrl+Shift+M)
-// [x] Right Ctrl for common use
+// [x] Right Ctrl for common uses
 
 enum layers {
   L_DEFAULT,
@@ -39,14 +39,12 @@ enum layers {
 };
 
 enum tap_dancing {
-  // TD_MUTE_CAD,
   TD_MICMUTE_CAD,
   TD_F12_MUTE,
 };
 
 // Tap dance setup
 qk_tap_dance_action_t tap_dance_actions[] = {
-  // [TD_MUTE_CAD] = ACTION_TAP_DANCE_DOUBLE(KC_MUTE, LCTL(LALT(KC_DEL))),
   [TD_MICMUTE_CAD] = ACTION_TAP_DANCE_DOUBLE(LCTL(LSFT(KC_M)), LCTL(LALT(KC_DEL))),
   [TD_F12_MUTE] = ACTION_TAP_DANCE_DOUBLE(KC_F12, KC_MUTE),
 };
